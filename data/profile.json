@@ -1,0 +1,19 @@
+{
+  "name": "Karthavya S",
+  "title": "Barrister-at-Law",
+  "avatar_id": "butler",
+  "total_score": 430,
+  "cases_completed": 7,
+  "verdicts_won": 0,
+  "arguments_submitted": 24,
+  "highest_score": 100,
+  "achievements": [
+    "Bar Exam Passed"
+  ],
+  "tutorial_completed": true,
+  "onboarded": true,
+  "sound_enabled": true,
+  "music_enabled": true,
+  "volume": 0.8,
+  "text_scale": 1.0
+}

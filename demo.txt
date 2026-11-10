@@ -1,0 +1,535 @@
+
+import pygame
+import sys
+
+pygame.init()
+
+# ==========================================
+# 1. WINDOW SETUP
+# ==========================================
+
+WIDTH = 1280
+HEIGHT = 720
+
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Logic Courtroom")
+
+clock = pygame.time.Clock()
+
+# ==========================================
+# 2. COLORS
+# ==========================================
+
+BACKGROUND = (239, 224, 194)
+DARK_BROWN = (75, 43, 27)
+WOOD = (112, 72, 43)
+LIGHT_PARCHMENT = (250, 240, 215)
+GOLD = (190, 145, 75)
+WHITE = (255, 255, 255)
+MUTED = (115, 91, 69)
+CARD_COLOR = (248, 237, 211)
+
+# ==========================================
+# 3. FONTS
+# ==========================================
+
+title_font = pygame.font.SysFont("Georgia", 55, bold=True)
+heading_font = pygame.font.SysFont("Georgia", 34, bold=True)
+button_font = pygame.font.SysFont("Georgia", 22, bold=True)
+normal_font = pygame.font.SysFont("Georgia", 18)
+small_font = pygame.font.SysFont("Georgia", 15)
+
+# ==========================================
+# 4. BUTTON CLASS
+# ==========================================
+
+class Button:
+
+    def __init__(self, x, y, width, height, text):
+
+        self.rect = pygame.Rect(x, y, width, height)
+        self.text = text
+
+    def draw(self, surface):
+
+        mouse = pygame.mouse.get_pos()
+
+        color = GOLD if self.rect.collidepoint(mouse) else WOOD
+
+        pygame.draw.rect(
+            surface, color, self.rect, border_radius=10
+        )
+
+        pygame.draw.rect(
+            surface, GOLD, self.rect, 2, border_radius=10
+        )
+
+        text_surface = button_font.render(
+            self.text, True, LIGHT_PARCHMENT
+        )
+
+        surface.blit(
+            text_surface,
+            text_surface.get_rect(center=self.rect.center)
+        )
+
+    def is_clicked(self, position):
+
+        return self.rect.collidepoint(position)
+
+
+# ==========================================
+# 5. CASE DATA
+# ==========================================
+
+cases = [
+
+    {
+        "id": "CASE 001",
+        "title": "The Midnight Murder",
+        "type": "Murder Investigation",
+        "description": "A businessman was found dead in his mansion at midnight. Four people were present at the scene.",
+        "difficulty": "HARD",
+        "suspects": 4,
+        "evidence": 8,
+        "reward": 500
+    },
+
+    {
+        "id": "CASE 002",
+        "title": "The Missing Necklace",
+        "type": "Theft Investigation",
+        "description": "A valuable diamond necklace disappeared during a private party. Three guests are under suspicion.",
+        "difficulty": "MEDIUM",
+        "suspects": 3,
+        "evidence": 6,
+        "reward": 300
+    },
+
+    {
+        "id": "CASE 003",
+        "title": "The Corporate Fraud",
+        "type": "Financial Investigation",
+        "description": "A company discovered suspicious financial transactions. The investigation points to three employees.",
+        "difficulty": "EASY",
+        "suspects": 3,
+        "evidence": 5,
+        "reward": 200
+    }
+
+]
+
+
+# ==========================================
+# 6. CASE CARD CLASS
+# ==========================================
+
+class CaseCard:
+
+    def __init__(self, x, y, width, height, case):
+
+        self.rect = pygame.Rect(x, y, width, height)
+        self.case = case
+
+        self.investigate_rect = pygame.Rect(
+            x + 25, y + height - 65, width - 50, 43
+        )
+
+    def draw(self, surface, selected=False):
+
+        mouse = pygame.mouse.get_pos()
+
+        hovering = self.rect.collidepoint(mouse)
+
+        # Card background
+        card_color = (
+            LIGHT_PARCHMENT if hovering or selected
+            else CARD_COLOR
+        )
+
+        pygame.draw.rect(
+            surface, card_color, self.rect, border_radius=15
+        )
+
+        # Card border
+        border_color = GOLD if selected or hovering else WOOD
+
+        pygame.draw.rect(
+            surface, border_color, self.rect, 3,
+            border_radius=15
+        )
+
+        # Case ID
+        case_id = small_font.render(
+            self.case["id"], True, MUTED
+        )
+
+        surface.blit(case_id, (self.rect.x + 22, self.rect.y + 18))
+
+        # Case title
+        title = heading_font.render(
+            self.case["title"], True, DARK_BROWN
+        )
+
+        # Smaller title font for long titles
+        if title.get_width() > self.rect.width - 35:
+            title = button_font.render(
+                self.case["title"], True, DARK_BROWN
+            )
+
+        surface.blit(
+            title, (self.rect.x + 20, self.rect.y + 55)
+        )
+
+        # Case type
+        case_type = normal_font.render(
+            self.case["type"], True, MUTED
+        )
+
+        surface.blit(
+            case_type, (self.rect.x + 22, self.rect.y + 105)
+        )
+
+        # Description
+        words = self.case["description"].split()
+        lines = []
+        current_line = ""
+
+        for word in words:
+
+            test_line = current_line + word + " "
+
+            if normal_font.size(test_line)[0] < self.rect.width - 45:
+                current_line = test_line
+            else:
+                lines.append(current_line)
+                current_line = word + " "
+
+        if current_line:
+            lines.append(current_line)
+
+        for i, line in enumerate(lines):
+
+            text = normal_font.render(
+                line, True, DARK_BROWN
+            )
+
+            surface.blit(
+                text,
+                (self.rect.x + 22, self.rect.y + 145 + i * 25)
+            )
+
+        # Difficulty
+        difficulty = small_font.render(
+            "Difficulty: " + self.case["difficulty"],
+            True, DARK_BROWN
+        )
+
+        surface.blit(
+            difficulty, (self.rect.x + 22, self.rect.y + 230)
+        )
+
+        # Suspects and evidence
+        details = small_font.render(
+            "Suspects: " + str(self.case["suspects"]) +
+            "    Evidence: " + str(self.case["evidence"]),
+            True, DARK_BROWN
+        )
+
+        surface.blit(
+            details, (self.rect.x + 22, self.rect.y + 265)
+        )
+
+        # Reward
+        reward = normal_font.render(
+            "Reward: " + str(self.case["reward"]) + " points",
+            True, DARK_BROWN
+        )
+
+        surface.blit(
+            reward, (self.rect.x + 22, self.rect.y + 295)
+        )
+
+        # Investigate button
+        button_color = GOLD if self.investigate_rect.collidepoint(mouse) else WOOD
+
+        pygame.draw.rect(
+            surface, button_color,
+            self.investigate_rect,
+            border_radius=8
+        )
+
+        button_text = button_font.render(
+            "INVESTIGATE", True, WHITE
+        )
+
+        surface.blit(
+            button_text,
+            button_text.get_rect(center=self.investigate_rect.center)
+        )
+
+    def clicked(self, position):
+
+        return self.rect.collidepoint(position)
+
+    def investigate_clicked(self, position):
+
+        return self.investigate_rect.collidepoint(position)
+
+
+# ==========================================
+# 7. CREATE CASE CARDS
+# ==========================================
+
+case_cards = [
+
+    CaseCard(65, 215, 360, 405, cases[0]),
+
+    CaseCard(460, 215, 360, 405, cases[1]),
+
+    CaseCard(855, 215, 360, 405, cases[2])
+
+]
+
+selected_case = None
+
+
+# ==========================================
+# 8. MAIN MENU BUTTONS
+# ==========================================
+
+start_button = Button(440, 330, 400, 65, "START GAME")
+
+create_button = Button(440, 420, 400, 65, "CREATE CASE")
+
+leaderboard_button = Button(440, 510, 400, 65, "LEADERBOARD")
+
+exit_button = Button(440, 600, 400, 55, "EXIT")
+
+back_button = Button(45, 45, 130, 45, "BACK")
+
+
+# ==========================================
+# 9. MAIN MENU SCREEN
+# ==========================================
+
+def draw_main_menu():
+
+    screen.fill(BACKGROUND)
+
+    pygame.draw.rect(
+        screen, DARK_BROWN,
+        (15, 15, WIDTH - 30, HEIGHT - 30),
+        5, border_radius=15
+    )
+
+    pygame.draw.rect(
+        screen, WOOD,
+        (35, 35, WIDTH - 70, 240),
+        border_radius=15
+    )
+
+    pygame.draw.rect(
+        screen, GOLD,
+        (45, 45, WIDTH - 90, 220),
+        3, border_radius=12
+    )
+
+    title = title_font.render(
+        "LOGIC COURTROOM", True, LIGHT_PARCHMENT
+    )
+
+    screen.blit(
+        title,
+        title.get_rect(center=(WIDTH // 2, 130))
+    )
+
+    subtitle = normal_font.render(
+        "Every Evidence Has a Story. Every Argument Has a Verdict.",
+        True, LIGHT_PARCHMENT
+    )
+
+    screen.blit(
+        subtitle,
+        subtitle.get_rect(center=(WIDTH // 2, 205))
+    )
+
+    start_button.draw(screen)
+    create_button.draw(screen)
+    leaderboard_button.draw(screen)
+    exit_button.draw(screen)
+
+
+# ==========================================
+# 10. CASE SELECTION SCREEN
+# ==========================================
+
+def draw_case_selection():
+
+    screen.fill(BACKGROUND)
+
+    # Page border
+    pygame.draw.rect(
+        screen, DARK_BROWN,
+        (15, 15, WIDTH - 30, HEIGHT - 30),
+        4, border_radius=15
+    )
+
+    # Heading
+    heading = title_font.render(
+        "SELECT YOUR CASE", True, DARK_BROWN
+    )
+
+    screen.blit(
+        heading,
+        heading.get_rect(center=(WIDTH // 2, 100))
+    )
+
+    subtitle = normal_font.render(
+        "Choose a case and begin your investigation.",
+        True, MUTED
+    )
+
+    screen.blit(
+        subtitle,
+        subtitle.get_rect(center=(WIDTH // 2, 155))
+    )
+
+    back_button.draw(screen)
+
+    # Draw all cards
+    for i, card in enumerate(case_cards):
+
+        card.draw(
+            screen,
+            selected=(selected_case == i)
+        )
+
+
+# ==========================================
+# 11. PLACEHOLDER SCREEN
+# ==========================================
+
+def draw_placeholder(title):
+
+    screen.fill(BACKGROUND)
+
+    heading = title_font.render(
+        title, True, DARK_BROWN
+    )
+
+    screen.blit(
+        heading,
+        heading.get_rect(center=(WIDTH // 2, 280))
+    )
+
+    message = normal_font.render(
+        "This module will be developed next.",
+        True, MUTED
+    )
+
+    screen.blit(
+        message,
+        message.get_rect(center=(WIDTH // 2, 370))
+    )
+
+    back_button.draw(screen)
+
+
+# ==========================================
+# 12. GAME LOOP
+# ==========================================
+
+running = True
+current_screen = "menu"
+
+while running:
+
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            running = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+
+            if event.button == 1:
+
+                if current_screen == "menu":
+
+                    if start_button.is_clicked(event.pos):
+                        current_screen = "cases"
+
+                    elif create_button.is_clicked(event.pos):
+                        current_screen = "create"
+
+                    elif leaderboard_button.is_clicked(event.pos):
+                        current_screen = "leaderboard"
+
+                    elif exit_button.is_clicked(event.pos):
+                        running = False
+
+                elif current_screen == "cases":
+
+                    if back_button.is_clicked(event.pos):
+
+                        current_screen = "menu"
+
+                    else:
+
+                        for i, card in enumerate(case_cards):
+
+                            if card.clicked(event.pos):
+                                selected_case = i
+
+                            if card.investigate_clicked(event.pos):
+
+                                selected_case = i
+
+                                if i == 0:
+                                    current_screen = "crime_scene"
+
+                                else:
+                                    current_screen = "case_details"
+
+                else:
+
+                    if back_button.is_clicked(event.pos):
+                        current_screen = "cases"
+
+    # DRAW SCREENS
+
+    if current_screen == "menu":
+
+        draw_main_menu()
+
+    elif current_screen == "cases":
+
+        draw_case_selection()
+
+    elif current_screen == "crime_scene":
+
+        draw_placeholder("CRIME SCENE")
+
+    elif current_screen == "case_details":
+
+        draw_placeholder("CASE DETAILS")
+
+    elif current_screen == "create":
+
+        draw_placeholder("CREATE CASE")
+
+    elif current_screen == "leaderboard":
+
+        draw_placeholder("LEADERBOARD")
+
+    pygame.display.flip()
+
+    clock.tick(60)
+
+
+# ==========================================
+# 13. QUIT
+# ==========================================
+
+pygame.quit()
+sys.exit()

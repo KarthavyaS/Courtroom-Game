@@ -1,0 +1,56 @@
+[
+  {
+    "id": "RULE_001",
+    "name": "Physical Contact with Weapon",
+    "antecedents": ["knife_found_at_scene", "suspect_fingerprints_on_knife"],
+    "consequent": "suspect_had_contact_with_knife",
+    "description": "Fingerprints on the murder weapon establish physical handling by the suspect.",
+    "category": "forensic"
+  },
+  {
+    "id": "RULE_002",
+    "name": "Lethal Weapon Identification",
+    "antecedents": ["victim_cause_of_death_stab_wound", "knife_found_at_scene", "blood_on_knife_matches_victim"],
+    "consequent": "knife_is_murder_weapon",
+    "description": "Stab wound cause of death combined with victim's blood on knife establishes it as the murder weapon.",
+    "category": "forensic"
+  },
+  {
+    "id": "RULE_003",
+    "name": "Opportunity and Scene Presence",
+    "antecedents": ["cctv_shows_suspect_entry", "suspect_present_at_mansion_at_midnight"],
+    "consequent": "suspect_had_opportunity",
+    "description": "Presence at the scene during time of death establishes opportunity.",
+    "category": "legal"
+  },
+  {
+    "id": "RULE_004",
+    "name": "Alibi Falsification",
+    "antecedents": ["cctv_shows_suspect_entry", "suspect_claimed_cinema_alibi"],
+    "consequent": "suspect_alibi_refuted",
+    "description": "Direct CCTV footage of suspect at the crime scene directly refutes an external alibi.",
+    "category": "alibi"
+  },
+  {
+    "id": "RULE_005",
+    "name": "Motive and Intent",
+    "antecedents": ["incriminating_phone_messages", "suspect_debt_or_inheritance"],
+    "consequent": "suspect_has_proven_motive",
+    "description": "Threatening messages combined with financial inheritance/debt establish strong motive.",
+    "category": "legal"
+  },
+  {
+    "id": "RULE_006",
+    "name": "Proof of Guilt Beyond Reasonable Doubt",
+    "antecedents": [
+      "knife_is_murder_weapon",
+      "suspect_had_contact_with_knife",
+      "suspect_had_opportunity",
+      "suspect_alibi_refuted",
+      "suspect_has_proven_motive"
+    ],
+    "consequent": "suspect_guilty_beyond_reasonable_doubt",
+    "description": "All required legal elements satisfied for murder conviction.",
+    "category": "legal"
+  }
+]

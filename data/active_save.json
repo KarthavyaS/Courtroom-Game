@@ -1,0 +1,39 @@
+{
+  "case_id": "CASE001",
+  "case_title": "The Midnight Murder",
+  "stage": "crime_scene",
+  "progress_pct": 45,
+  "progress": {
+    "briefing_read": true,
+    "crime_scene_explored": true,
+    "suspects_reviewed": false,
+    "evidence_reviewed": false,
+    "case_board_reviewed": false,
+    "argument_prepared": true,
+    "courtroom_completed": false,
+    "current_stage": "crime_scene",
+    "inspected_evidence_ids": [
+      "EVD-001"
+    ],
+    "interviewed_suspect_ids": [
+      "SUS-001"
+    ],
+    "suspect_qa_history": {
+      "SUS-001": [
+        "Q1",
+        "Q4",
+        "Q3",
+        "Q2"
+      ]
+    },
+    "player_notes": ""
+  },
+  "collected_evidence_ids": [],
+  "selected_suspect_id": "SUS-001",
+  "warning_count": 0,
+  "trial_transcript": [],
+  "player_notes": "",
+  "total_evidence": 8,
+  "completed": false,
+  "timestamp": "2026-11-05 08:55"
+}

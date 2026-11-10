@@ -1,0 +1,1337 @@
+[
+  {
+    "id": "CASE003",
+    "title": "The Corporate Fraud",
+    "type": "Financial Investigation",
+    "description": "\u00a32.5M was siphoned through ghost invoices to a Cayman offshore account.",
+    "difficulty": "EASY",
+    "reward": 200,
+    "scene_name": "Executive Finance Office",
+    "scene_type": "office",
+    "solution_suspect_id": "SUS-201",
+    "solution_conclusion": "suspect_guilty_of_embezzlement",
+    "solution_summary": "CFO Richard Sterling signed off fake transfers and routed funds to his Cayman shell company.",
+    "suspects": [
+      {
+        "id": "SUS-201",
+        "name": "Richard Sterling",
+        "occupation": "Chief Financial Officer",
+        "relationship": "Executive Officer",
+        "motive": "Heavy debts and luxury yacht expenses.",
+        "alibi": "Claims an external hacker spoofed his credentials.",
+        "statement": "Our network was breached! A hacker spoofed my login!",
+        "known_facts": [
+          "financial_fraud_detected"
+        ],
+        "contradictions": [
+          "Hardware 2FA token used for authorization was in Richard's physical pocket."
+        ],
+        "avatar_type": "executive",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-202",
+        "name": "Elena Rostova",
+        "occupation": "Senior Accountant",
+        "relationship": "Subordinate",
+        "motive": "Passed over for promotion.",
+        "alibi": "On verified maternity leave.",
+        "statement": "I reported the invoice anomalies as soon as I returned.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "partner",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-203",
+        "name": "Thomas Vance",
+        "occupation": "IT Administrator",
+        "relationship": "Systems Support",
+        "motive": "Salary dispute.",
+        "alibi": "In server room with logged CCTV.",
+        "statement": "I flagged the abnormal wire within minutes of execution.",
+        "known_facts": [],
+        "contradictions": [],
+        "avatar_type": "doctor",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-201",
+        "name": "Offshore Wire Ledger",
+        "description": "Wire records routing \u00a32.5M to Apex Horizons Ltd, owned by Richard Sterling.",
+        "category": "Digital",
+        "reliability": 0.98,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          480,
+          420,
+          80,
+          60
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "financial_fraud_detected",
+          "offshore_account_linked_to_suspect"
+        ],
+        "details": "Apex Horizons registration directly lists Richard Sterling as owner."
+      },
+      {
+        "id": "EVD-202",
+        "name": "Hardware 2FA Security Token",
+        "description": "Physical RSA token in Richard office used to authorize the transfer.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.9,
+        "collected": false,
+        "scene_pos": [
+          620,
+          460,
+          50,
+          50
+        ],
+        "icon_type": "phone",
+        "facts_unlocked": [
+          "suspect_digital_signature_used"
+        ],
+        "details": "Token was active in Richard office at transfer time."
+      },
+      {
+        "id": "EVD-203",
+        "name": "Deleted Email Archive",
+        "description": "Recovered emails instructing offshore agents to liquidate funds.",
+        "category": "Digital",
+        "reliability": 0.9,
+        "relevance": 0.85,
+        "collected": false,
+        "scene_pos": [
+          220,
+          320,
+          70,
+          70
+        ],
+        "icon_type": "folder",
+        "facts_unlocked": [
+          "incriminating_phone_messages"
+        ],
+        "details": "Emails sent from Richard private workstation."
+      },
+      {
+        "id": "EVD-204",
+        "name": "Forged Vendor Invoice",
+        "description": "Fake software invoice stamped with CFO approval.",
+        "category": "Physical",
+        "reliability": 0.85,
+        "relevance": 0.75,
+        "collected": false,
+        "scene_pos": [
+          350,
+          440,
+          70,
+          50
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "forged_invoice_at_scene"
+        ],
+        "details": "Signature matches CFO approval stamps."
+      },
+      {
+        "id": "EVD-205",
+        "name": "Encrypted USB Drive",
+        "description": "USB found in executive desk containing offshore bank keys.",
+        "category": "Digital",
+        "reliability": 0.9,
+        "relevance": 0.8,
+        "collected": false,
+        "scene_pos": [
+          140,
+          440,
+          50,
+          50
+        ],
+        "icon_type": "phone",
+        "facts_unlocked": [
+          "encrypted_keys_on_usb"
+        ],
+        "details": "Contains private keys for Cayman bank account."
+      }
+    ],
+    "initial_facts": [
+      "financial_fraud_detected"
+    ],
+    "rules": [
+      {
+        "id": "RULE_201",
+        "name": "Unauthorized Fund Transfer",
+        "antecedents": [
+          "financial_fraud_detected",
+          "suspect_digital_signature_used"
+        ],
+        "consequent": "suspect_executed_fraudulent_transfer",
+        "description": "Digital credentials matching suspect used for fraudulent transaction."
+      },
+      {
+        "id": "RULE_202",
+        "name": "Corporate Embezzlement Conviction",
+        "antecedents": [
+          "suspect_executed_fraudulent_transfer",
+          "offshore_account_linked_to_suspect"
+        ],
+        "consequent": "suspect_guilty_of_embezzlement",
+        "description": "Fraudulent transfer directly linked to suspect's offshore account confirms embezzlement."
+      }
+    ]
+  },
+  {
+    "id": "CASE002",
+    "title": "The Missing Necklace",
+    "type": "Theft Investigation",
+    "description": "Lady Kensington diamond necklace vanished from her private safe during a charity ball.",
+    "difficulty": "MEDIUM",
+    "reward": 300,
+    "scene_name": "Kensington Vault Suite",
+    "scene_type": "vault",
+    "solution_suspect_id": "SUS-101",
+    "solution_conclusion": "suspect_guilty_of_theft",
+    "solution_summary": "Marcus Sterling used a duplicate key to steal the necklace and hide it in his appraisal case.",
+    "suspects": [
+      {
+        "id": "SUS-101",
+        "name": "Marcus Sterling",
+        "occupation": "High-End Appraiser",
+        "relationship": "Family Jeweler",
+        "motive": "Facing bankruptcy and gambling debts.",
+        "alibi": "Appraising silverware in the conservatory.",
+        "statement": "I was admiring silverware all night. I never went near the safe!",
+        "known_facts": [
+          "suspect_had_safe_key"
+        ],
+        "contradictions": [
+          "Necklace appraisal velvet cloth found in Marcus's valise."
+        ],
+        "avatar_type": "jeweler",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-102",
+        "name": "Duchess Vivienne",
+        "occupation": "Noble Guest",
+        "relationship": "Socialite Friend",
+        "motive": "Coveted the necklace for her collection.",
+        "alibi": "Singing near the ballroom orchestra.",
+        "statement": "I was dancing in the ballroom all evening with the guests.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "socialite",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-103",
+        "name": "Higgins",
+        "occupation": "Private Butler",
+        "relationship": "Staff",
+        "motive": "Disgruntled by low wages.",
+        "alibi": "Serving wine in the dining hall.",
+        "statement": "I served champagne until midnight, witnessed by many.",
+        "known_facts": [],
+        "contradictions": [],
+        "avatar_type": "butler",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-101",
+        "name": "Opened Wall Safe",
+        "description": "Safe opened without damage using a precision duplicate key.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.9,
+        "collected": false,
+        "scene_pos": [
+          580,
+          240,
+          90,
+          90
+        ],
+        "icon_type": "safe",
+        "facts_unlocked": [
+          "safe_opened_without_forced_entry"
+        ],
+        "details": "Lock shows zero signs of forced tool entry."
+      },
+      {
+        "id": "EVD-102",
+        "name": "Duplicate Brass Safe Key",
+        "description": "Found in Marcus velvet case, matching the Kensington safe.",
+        "category": "Physical",
+        "reliability": 0.9,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          220,
+          480,
+          50,
+          50
+        ],
+        "icon_type": "knife",
+        "facts_unlocked": [
+          "suspect_had_safe_key"
+        ],
+        "details": "Cut matches the Kensington wall safe lock cylinder."
+      },
+      {
+        "id": "EVD-103",
+        "name": "Velvet Jewelry Box in Marcus's Bag",
+        "description": "Stolen diamond necklace hidden inside Marcus case.",
+        "category": "Direct",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          450,
+          430,
+          80,
+          60
+        ],
+        "icon_type": "folder",
+        "facts_unlocked": [
+          "necklace_found_in_suspect_bag",
+          "necklace_identified_as_stolen"
+        ],
+        "details": "Contains the genuine stolen Kensington diamond necklace."
+      },
+      {
+        "id": "EVD-104",
+        "name": "Guest Registry Log",
+        "description": "Log showing Marcus entered private wing at 11:20 PM.",
+        "category": "Testimonial",
+        "reliability": 0.7,
+        "relevance": 0.5,
+        "collected": false,
+        "scene_pos": [
+          120,
+          380,
+          60,
+          60
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "marcus_logged_on_second_floor"
+        ],
+        "details": "Shows Marcus entered the private quarters during the ball."
+      },
+      {
+        "id": "EVD-105",
+        "name": "Silk Glove Fragment",
+        "description": "White thread on vault dial matching Marcus appraisal gloves.",
+        "category": "Physical",
+        "reliability": 0.8,
+        "relevance": 0.6,
+        "collected": false,
+        "scene_pos": [
+          630,
+          350,
+          40,
+          40
+        ],
+        "icon_type": "fingerprint",
+        "facts_unlocked": [
+          "silk_thread_matches_appraiser_gloves"
+        ],
+        "details": "Thread matches white appraisal gloves worn by Marcus."
+      },
+      {
+        "id": "EVD-106",
+        "name": "Ballroom Orchestra Recording",
+        "description": "Audio verifying Duchess Vivienne was singing near the band.",
+        "category": "Digital",
+        "reliability": 0.9,
+        "relevance": 0.7,
+        "collected": false,
+        "scene_pos": [
+          350,
+          240,
+          60,
+          60
+        ],
+        "icon_type": "cctv",
+        "facts_unlocked": [
+          "suspect_alibi_verified"
+        ],
+        "details": "Confirms Duchess was in the ballroom continuously."
+      }
+    ],
+    "initial_facts": [
+      "safe_opened_without_forced_entry"
+    ],
+    "rules": [
+      {
+        "id": "RULE_101",
+        "name": "Safe Unauthorized Access",
+        "antecedents": [
+          "suspect_had_safe_key",
+          "safe_opened_without_forced_entry"
+        ],
+        "consequent": "suspect_unauthorized_vault_access",
+        "description": "Possession of safe key and unforced entry indicates insider access."
+      },
+      {
+        "id": "RULE_102",
+        "name": "Possession of Stolen Property",
+        "antecedents": [
+          "necklace_found_in_suspect_bag",
+          "necklace_identified_as_stolen",
+          "suspect_unauthorized_vault_access"
+        ],
+        "consequent": "suspect_guilty_of_theft",
+        "description": "Possession of stolen necklace with vault access confirms grand larceny."
+      }
+    ]
+  },
+  {
+    "id": "CASE004",
+    "title": "The Clocktower Sabotage",
+    "type": "Grand Larceny & Sabotage",
+    "description": "The Westminster Clock was sabotaged and its platinum gear stolen at midnight.",
+    "difficulty": "MEDIUM",
+    "reward": 600,
+    "scene_name": "Westminster Clockwork Tower",
+    "scene_type": "clocktower",
+    "solution_suspect_id": "SUS-401",
+    "solution_conclusion": "suspect_guilty_beyond_reasonable_doubt",
+    "solution_summary": "Tobias Vance used his master key to steal the platinum gear to pay debts, leaving filings on his apron.",
+    "suspects": [
+      {
+        "id": "SUS-401",
+        "name": "Tobias Vance",
+        "occupation": "Master Horologist",
+        "relationship": "Clockmaker",
+        "motive": "Facing \u00a3200,000 in loan shark debts.",
+        "alibi": "Claims he was asleep in the ground floor lodge.",
+        "statement": "I was sound asleep in the porter lodge all night.",
+        "known_facts": [
+          "suspect_facing_bankruptcy_motive"
+        ],
+        "contradictions": [
+          "CCTV captures Tobias climbing the tower stairs at 11:55 PM, directly debunking his lodge alibi.",
+          "Platinum metal shavings matching the stolen gear were found embedded in Tobias's work apron."
+        ],
+        "avatar_type": "heir",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-402",
+        "name": "Lady Genevieve",
+        "occupation": "Antique Collector",
+        "relationship": "Benefactor",
+        "motive": "Wanted the mechanism for her private museum.",
+        "alibi": "Attending a charity ball at the Savoy Hotel.",
+        "statement": "I was at the Savoy gala all evening. The guest list confirms it.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "partner",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-403",
+        "name": "Alistair Finch",
+        "occupation": "Tower Keeper",
+        "relationship": "Maintenance Staff",
+        "motive": "Upset over wage reductions.",
+        "alibi": "Securing the lower bell belfry.",
+        "statement": "I made rounds on the belfry level all evening.",
+        "known_facts": [
+          "tower_keeper_secured_belfry"
+        ],
+        "contradictions": [],
+        "avatar_type": "butler",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-404",
+        "name": "Dr. Sterling",
+        "occupation": "City Surveyor",
+        "relationship": "Council Inspector",
+        "motive": "Commissioned tower structural report.",
+        "alibi": "Reviewing blueprints at the City Council archives.",
+        "statement": "I finished my survey at noon and had no business at midnight.",
+        "known_facts": [
+          "surveyor_left_at_noon"
+        ],
+        "contradictions": [],
+        "avatar_type": "doctor",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-401",
+        "name": "Damaged Gear Mechanism",
+        "description": "Drive housing torn open with specialized horology tools.",
+        "category": "Direct",
+        "reliability": 1.0,
+        "relevance": 1.0,
+        "collected": false,
+        "scene_pos": [
+          430,
+          340,
+          110,
+          80
+        ],
+        "icon_type": "knife",
+        "facts_unlocked": [
+          "escapement_gear_stolen_from_clock"
+        ],
+        "details": "Removal required professional horological tools."
+      },
+      {
+        "id": "EVD-402",
+        "name": "Master Gear Key",
+        "description": "Brass key with initials T.V. found on the gear platform.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          570,
+          440,
+          70,
+          50
+        ],
+        "icon_type": "glass",
+        "facts_unlocked": [
+          "suspect_master_key_used_at_scene",
+          "suspect_fingerprints_on_clockwork"
+        ],
+        "details": "Fingerprints on the key match Tobias Vance."
+      },
+      {
+        "id": "EVD-403",
+        "name": "Tower Security Camera Log",
+        "description": "CCTV recorded at the internal spiral staircase.",
+        "category": "Digital",
+        "reliability": 0.98,
+        "relevance": 0.9,
+        "collected": false,
+        "scene_pos": [
+          210,
+          270,
+          80,
+          70
+        ],
+        "icon_type": "folder",
+        "facts_unlocked": [
+          "suspect_entered_tower_at_midnight"
+        ],
+        "details": "11:55 PM: Man wearing horologist apron enters gear chamber."
+      },
+      {
+        "id": "EVD-404",
+        "name": "Platinum Metal Filings",
+        "description": "Microscopic platinum shavings inside Tobias apron pocket.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          330,
+          430,
+          80,
+          60
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "platinum_shavings_match_stolen_gear"
+        ],
+        "details": "Spectrometry confirms shavings match the 950-platinum clock gear."
+      },
+      {
+        "id": "EVD-405",
+        "name": "Blackmail Telegram",
+        "description": "Debt collection notice demanding \u00a350,000 within 24 hours.",
+        "category": "Circumstantial",
+        "reliability": 0.9,
+        "relevance": 0.85,
+        "collected": false,
+        "scene_pos": [
+          130,
+          420,
+          70,
+          50
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "suspect_facing_bankruptcy_motive"
+        ],
+        "details": "Sent to Tobias Vance from loan sharks."
+      }
+    ],
+    "initial_facts": [
+      "escapement_gear_stolen_from_clock"
+    ],
+    "rules": [
+      {
+        "id": "RULE_401",
+        "name": "Tower Access & Opportunity",
+        "antecedents": [
+          "escapement_gear_stolen_from_clock",
+          "suspect_entered_tower_at_midnight"
+        ],
+        "consequent": "suspect_present_at_sabotage_scene",
+        "description": "Presence at the clock tower during the sabotage window proves physical opportunity."
+      },
+      {
+        "id": "RULE_402",
+        "name": "Physical Theft Entailment",
+        "antecedents": [
+          "suspect_present_at_sabotage_scene",
+          "platinum_shavings_match_stolen_gear",
+          "suspect_fingerprints_on_clockwork"
+        ],
+        "consequent": "suspect_guilty_beyond_reasonable_doubt",
+        "description": "Presence combined with physical possession of shavings and fingerprints proves guilt beyond reasonable doubt."
+      }
+    ]
+  },
+  {
+    "id": "CASE001",
+    "title": "The Midnight Murder",
+    "type": "Murder Investigation",
+    "description": "Arthur Vance was fatally stabbed in his locked study at midnight. Four suspects were present.",
+    "difficulty": "HARD",
+    "reward": 500,
+    "scene_name": "Vance Manor Study",
+    "scene_type": "mansion",
+    "solution_suspect_id": "SUS-001",
+    "solution_conclusion": "suspect_guilty_beyond_reasonable_doubt",
+    "solution_summary": "Victor Vance entered at 11:50 PM, handled the knife leaving fingerprints, and falsified his cinema alibi.",
+    "suspects": [
+      {
+        "id": "SUS-001",
+        "name": "Victor Vance",
+        "occupation": "Heir & Younger Brother",
+        "relationship": "Brother",
+        "motive": "Inherits \u00a310M estate; heavy personal debts.",
+        "alibi": "Claims he attended a late-night cinema screening until 1 AM.",
+        "statement": "I was at the cinema downtown all evening! I never touched any knives.",
+        "known_facts": [
+          "suspect_claimed_cinema_alibi",
+          "suspect_debt_or_inheritance"
+        ],
+        "contradictions": [
+          "CCTV captures Victor entering the mansion at 11:50 PM, directly debunking his cinema alibi.",
+          "Victor's fingerprints were identified on the handle of the bloody murder knife."
+        ],
+        "avatar_type": "heir",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-002",
+        "name": "Clara Sterling",
+        "occupation": "Managing Business Partner",
+        "relationship": "Business Partner",
+        "motive": "Threatened with an audit over joint business funds.",
+        "alibi": "Working in the library until 11:15 PM, then retired to guest room.",
+        "statement": "We argued earlier, but I left Arthur alive in his study.",
+        "known_facts": [
+          "business_partner_argument_at_9pm"
+        ],
+        "contradictions": [],
+        "avatar_type": "partner",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-003",
+        "name": "Arthur Finch",
+        "occupation": "Head Butler",
+        "relationship": "Staff",
+        "motive": "Given termination notice earlier that morning.",
+        "alibi": "Polishing silverware in the basement pantry.",
+        "statement": "I served Master Arthur tea at 10:30 PM, then went straight to the pantry.",
+        "known_facts": [
+          "butler_served_tea_at_1030pm"
+        ],
+        "contradictions": [],
+        "avatar_type": "butler",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-004",
+        "name": "Dr. Julian Hayes",
+        "occupation": "Family Physician",
+        "relationship": "Personal Doctor",
+        "motive": "Dispute over Arthur medical trust donation.",
+        "alibi": "Performing emergency surgery at St. Jude Hospital.",
+        "statement": "I was at the hospital in surgery until 2:30 AM. Hospital logs confirm it.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "doctor",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-001",
+        "name": "Coroner's Autopsy Report",
+        "description": "Victim died from a single stab wound between 11:45 PM and 12:15 AM.",
+        "category": "Direct",
+        "reliability": 1.0,
+        "relevance": 1.0,
+        "collected": false,
+        "scene_pos": [
+          430,
+          360,
+          110,
+          80
+        ],
+        "icon_type": "body",
+        "facts_unlocked": [
+          "victim_cause_of_death_stab_wound"
+        ],
+        "details": "Cause of death: acute blood loss from a 6-inch blade puncture."
+      },
+      {
+        "id": "EVD-002",
+        "name": "Bloody Chef Knife",
+        "description": "6-inch Japanese steel kitchen knife stained with victim blood.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          570,
+          470,
+          70,
+          45
+        ],
+        "icon_type": "knife",
+        "facts_unlocked": [
+          "knife_found_at_scene",
+          "blood_on_knife_matches_victim",
+          "suspect_fingerprints_on_knife"
+        ],
+        "details": "Fingerprints on handle match Victor Vance with 99.8% certainty."
+      },
+      {
+        "id": "EVD-003",
+        "name": "Fingerprints on Brandy Goblet",
+        "description": "Half-empty crystal goblet resting on the study side table.",
+        "category": "Physical",
+        "reliability": 0.85,
+        "relevance": 0.6,
+        "collected": false,
+        "scene_pos": [
+          590,
+          360,
+          50,
+          50
+        ],
+        "icon_type": "fingerprint",
+        "facts_unlocked": [
+          "fingerprints_on_goblet"
+        ],
+        "details": "Arthur Vance and Butler Finch fingerprints detected on rim."
+      },
+      {
+        "id": "EVD-004",
+        "name": "Broken Balcony Glass",
+        "description": "French balcony doors shattered outward; latch opened from inside.",
+        "category": "Physical",
+        "reliability": 0.75,
+        "relevance": 0.65,
+        "collected": false,
+        "scene_pos": [
+          140,
+          220,
+          90,
+          120
+        ],
+        "icon_type": "glass",
+        "facts_unlocked": [
+          "broken_window_opened_from_inside"
+        ],
+        "details": "Fracture analysis confirms latch was opened from inside."
+      },
+      {
+        "id": "EVD-005",
+        "name": "Encrypted Smartphone",
+        "description": "Smartphone with urgent SMS communications found in desk drawer.",
+        "category": "Digital",
+        "reliability": 0.9,
+        "relevance": 0.85,
+        "collected": false,
+        "scene_pos": [
+          480,
+          260,
+          55,
+          55
+        ],
+        "icon_type": "phone",
+        "facts_unlocked": [
+          "incriminating_phone_messages",
+          "suspect_debt_or_inheritance"
+        ],
+        "details": "Message from Victor: If you refuse the estate advance, you will regret it."
+      },
+      {
+        "id": "EVD-006",
+        "name": "CCTV Security Hard Drive",
+        "description": "Gate security footage salvaged from estate gatehouse.",
+        "category": "Digital",
+        "reliability": 0.98,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          270,
+          190,
+          75,
+          75
+        ],
+        "icon_type": "cctv",
+        "facts_unlocked": [
+          "cctv_shows_suspect_entry",
+          "suspect_present_at_mansion_at_midnight"
+        ],
+        "details": "Camera 03 captures Victor Vance entering through side gate at 11:50 PM."
+      },
+      {
+        "id": "EVD-007",
+        "name": "Bloodstained Persian Rug",
+        "description": "Heavy wool rug beneath desk with distinctive blood splatter.",
+        "category": "Physical",
+        "reliability": 0.8,
+        "relevance": 0.7,
+        "collected": false,
+        "scene_pos": [
+          350,
+          460,
+          180,
+          70
+        ],
+        "icon_type": "blood",
+        "facts_unlocked": [
+          "bloodstains_on_rug"
+        ],
+        "details": "Blood pattern matches sudden attack while seated behind desk."
+      },
+      {
+        "id": "EVD-008",
+        "name": "Muddy Bootprints",
+        "description": "Tread marks near french doors leading from wet garden.",
+        "category": "Physical",
+        "reliability": 0.75,
+        "relevance": 0.65,
+        "collected": false,
+        "scene_pos": [
+          260,
+          490,
+          70,
+          50
+        ],
+        "icon_type": "window",
+        "facts_unlocked": [
+          "muddy_bootprints_match_garden"
+        ],
+        "details": "Size 10 leather soles matching shoes found in Victor wardrobe."
+      }
+    ],
+    "initial_facts": [
+      "knife_found_at_scene",
+      "suspect_claimed_cinema_alibi"
+    ],
+    "rules": [
+      {
+        "id": "RULE_001",
+        "name": "Physical Contact with Weapon",
+        "antecedents": [
+          "knife_found_at_scene",
+          "suspect_fingerprints_on_knife"
+        ],
+        "consequent": "suspect_had_contact_with_knife",
+        "description": "Fingerprints on the knife establish physical contact."
+      },
+      {
+        "id": "RULE_002",
+        "name": "Lethal Weapon Identification",
+        "antecedents": [
+          "victim_cause_of_death_stab_wound",
+          "knife_found_at_scene",
+          "blood_on_knife_matches_victim"
+        ],
+        "consequent": "knife_is_murder_weapon",
+        "description": "Stab wound cause of death combined with victim's blood on knife establishes it as the murder weapon."
+      },
+      {
+        "id": "RULE_003",
+        "name": "Opportunity and Scene Presence",
+        "antecedents": [
+          "cctv_shows_suspect_entry",
+          "suspect_present_at_mansion_at_midnight"
+        ],
+        "consequent": "suspect_had_opportunity",
+        "description": "Presence at the scene during time of death establishes opportunity."
+      },
+      {
+        "id": "RULE_004",
+        "name": "Alibi Falsification",
+        "antecedents": [
+          "cctv_shows_suspect_entry",
+          "suspect_claimed_cinema_alibi"
+        ],
+        "consequent": "suspect_alibi_refuted",
+        "description": "Direct CCTV footage of suspect at the crime scene directly refutes an external alibi."
+      },
+      {
+        "id": "RULE_005",
+        "name": "Motive and Intent",
+        "antecedents": [
+          "incriminating_phone_messages",
+          "suspect_debt_or_inheritance"
+        ],
+        "consequent": "suspect_has_proven_motive",
+        "description": "Threatening messages combined with financial inheritance/debt establish strong motive."
+      },
+      {
+        "id": "RULE_006",
+        "name": "Proof of Guilt Beyond Reasonable Doubt",
+        "antecedents": [
+          "knife_is_murder_weapon",
+          "suspect_had_contact_with_knife",
+          "suspect_had_opportunity",
+          "suspect_alibi_refuted",
+          "suspect_has_proven_motive"
+        ],
+        "consequent": "suspect_guilty_beyond_reasonable_doubt",
+        "description": "All legal requirements satisfied for murder conviction."
+      }
+    ]
+  },
+  {
+    "id": "CASE005",
+    "title": "The Poisoner of St. Jude's",
+    "type": "Medical Homicide",
+    "description": "Dr. Ward was lethally poisoned with digitalis in his tea in the surgical archives.",
+    "difficulty": "HARD",
+    "reward": 750,
+    "scene_name": "St. Jude's Surgical Archives",
+    "scene_type": "hospital",
+    "solution_suspect_id": "SUS-501",
+    "solution_conclusion": "suspect_guilty_beyond_reasonable_doubt",
+    "solution_summary": "Dr. Thaddeus Hayes poisoned Dr. Ward to prevent exposure of research plagiarism.",
+    "suspects": [
+      {
+        "id": "SUS-501",
+        "name": "Dr. Thaddeus Hayes",
+        "occupation": "Senior Surgeon",
+        "relationship": "Colleague",
+        "motive": "Ward discovered Hayes plagiarized his landmark cardiac study.",
+        "alibi": "Claims he was in the downstairs cafeteria having tea.",
+        "statement": "Archibald was a valued colleague! I was in the cafeteria all evening.",
+        "known_facts": [
+          "victim_threatened_to_expose_plagiarism"
+        ],
+        "contradictions": [
+          "Pharmacy biometric log records Thaddeus dispensing pure digitalis extract at 11:32 PM.",
+          "Digitalis toxin residue was detected on Thaddeus's latex surgical gloves found in the archive bin."
+        ],
+        "avatar_type": "doctor",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-502",
+        "name": "Nurse Beatrice Vance",
+        "occupation": "Head Pharmacist",
+        "relationship": "Staff",
+        "motive": "Recently passed over for promotion.",
+        "alibi": "Dispensing routine medications in Ward 4.",
+        "statement": "I was with patients on Ward 4 all night. Every dose is logged.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "heir",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-503",
+        "name": "Leonard Cross",
+        "occupation": "Pharmaceutical Rep",
+        "relationship": "Vendor",
+        "motive": "Ward canceled a \u00a3500,000 pharmaceutical contract.",
+        "alibi": "Checked out of hospital at 8 PM and stayed at hotel.",
+        "statement": "I was furious about the contract, but I left hours before the incident.",
+        "known_facts": [
+          "vendor_left_at_8pm"
+        ],
+        "contradictions": [],
+        "avatar_type": "partner",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-504",
+        "name": "Clara Finch",
+        "occupation": "Archive Clerk",
+        "relationship": "Staff",
+        "motive": "None established.",
+        "alibi": "Filing records in basement storage.",
+        "statement": "I brought Dr. Ward his tea tray at 10:30 PM. He was alive and reading.",
+        "known_facts": [
+          "tea_served_at_1030pm"
+        ],
+        "contradictions": [],
+        "avatar_type": "butler",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-501",
+        "name": "Poisoned Silver Teapot",
+        "description": "Silver teapot infused with lethal digitalis glycoside.",
+        "category": "Direct",
+        "reliability": 1.0,
+        "relevance": 1.0,
+        "collected": false,
+        "scene_pos": [
+          440,
+          350,
+          90,
+          70
+        ],
+        "icon_type": "knife",
+        "facts_unlocked": [
+          "victim_poisoned_with_digitalis"
+        ],
+        "details": "Dosage was 50x lethal threshold; rapid cardiac arrest within 10 minutes."
+      },
+      {
+        "id": "EVD-502",
+        "name": "Pharmacy Dispenser Biometric Log",
+        "description": "Digital access log of restricted poisons cabinet.",
+        "category": "Digital",
+        "reliability": 0.98,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          590,
+          430,
+          70,
+          60
+        ],
+        "icon_type": "folder",
+        "facts_unlocked": [
+          "suspect_dispensed_lethal_digitalis",
+          "suspect_badge_used_at_dispensary"
+        ],
+        "details": "Card #409 (Dr. T. Hayes) unlocked digitalis vault at 11:32 PM."
+      },
+      {
+        "id": "EVD-503",
+        "name": "Discarded Surgical Gloves",
+        "description": "Latex gloves in archive waste bin with chemical stains.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          210,
+          310,
+          80,
+          60
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "digitalis_residue_on_suspect_gloves"
+        ],
+        "details": "Digitalis powder and DNA matching Thaddeus Hayes found on lining."
+      },
+      {
+        "id": "EVD-504",
+        "name": "Plagiarism Accusation Letter",
+        "description": "Draft letter from Dr. Ward demanding Hayes immediate resignation.",
+        "category": "Circumstantial",
+        "reliability": 0.9,
+        "relevance": 0.85,
+        "collected": false,
+        "scene_pos": [
+          330,
+          440,
+          80,
+          50
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "victim_threatened_to_expose_plagiarism"
+        ],
+        "details": "Demands Hayes resign or face criminal fraud charges."
+      },
+      {
+        "id": "EVD-505",
+        "name": "Hospital Corridor Security Pass",
+        "description": "Card reader log at archive corridor door 3B.",
+        "category": "Digital",
+        "reliability": 0.9,
+        "relevance": 0.8,
+        "collected": false,
+        "scene_pos": [
+          130,
+          430,
+          60,
+          50
+        ],
+        "icon_type": "phone",
+        "facts_unlocked": [
+          "suspect_present_in_archive_wing"
+        ],
+        "details": "Records Thaddeus Hayes scanning into archive corridor at 11:40 PM."
+      }
+    ],
+    "initial_facts": [
+      "victim_poisoned_with_digitalis"
+    ],
+    "rules": [
+      {
+        "id": "RULE_501",
+        "name": "Poison Procurement & Opportunity",
+        "antecedents": [
+          "victim_poisoned_with_digitalis",
+          "suspect_dispensed_lethal_digitalis",
+          "suspect_present_in_archive_wing"
+        ],
+        "consequent": "suspect_administered_lethal_poison",
+        "description": "Procuring the poison and entering the crime scene during the poisoning window establishes administration."
+      },
+      {
+        "id": "RULE_502",
+        "name": "Homicide Conviction",
+        "antecedents": [
+          "suspect_administered_lethal_poison",
+          "digitalis_residue_on_suspect_gloves",
+          "victim_threatened_to_expose_plagiarism"
+        ],
+        "consequent": "suspect_guilty_beyond_reasonable_doubt",
+        "description": "Physical chemical proof combined with established motive and administration confirms murder beyond reasonable doubt."
+      }
+    ]
+  },
+  {
+    "id": "CASE006",
+    "title": "The Royal Sovereign Diamond",
+    "type": "Museum Vault Heist",
+    "description": "The 200-carat Sovereign Diamond was swapped with a glass fake in the Royal Vault.",
+    "difficulty": "HARD",
+    "reward": 1000,
+    "scene_name": "Queen's Royal Gallery Vault",
+    "scene_type": "museum",
+    "solution_suspect_id": "SUS-601",
+    "solution_conclusion": "suspect_guilty_beyond_reasonable_doubt",
+    "solution_summary": "Director Raymond Sterling stole the diamond to sell to smugglers, bypassing lasers with his credentials.",
+    "suspects": [
+      {
+        "id": "SUS-601",
+        "name": "Lord Raymond Sterling",
+        "occupation": "Gallery Director",
+        "relationship": "Director",
+        "motive": "Gaming debts; arranged offshore sale to an illegal antiquities cartel.",
+        "alibi": "Claims he attended a diplomatic dinner at the French Embassy.",
+        "statement": "I have dedicated my life to the Gallery! I was dining at the Embassy.",
+        "known_facts": [
+          "suspect_contracted_smuggling_vessel"
+        ],
+        "contradictions": [
+          "Biometric vault console shows Raymond's thumbprint override at 11:42 PM.",
+          "Diamond dust residue matching the Sovereign Diamond was identified inside Raymond's leather briefcase."
+        ],
+        "avatar_type": "partner",
+        "is_guilty": true
+      },
+      {
+        "id": "SUS-602",
+        "name": "Evelyn Vance",
+        "occupation": "Chief Gemologist",
+        "relationship": "Curator",
+        "motive": "Dispute over provenance attribution.",
+        "alibi": "Working in university lab under supervision.",
+        "statement": "I authenticated the stone at 5 PM, then went straight to my lab.",
+        "known_facts": [
+          "suspect_alibi_verified"
+        ],
+        "contradictions": [],
+        "avatar_type": "heir",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-603",
+        "name": "Marcus Blackwood",
+        "occupation": "Chief of Security",
+        "relationship": "Security Staff",
+        "motive": "None.",
+        "alibi": "Stationed at the main gallery security desk.",
+        "statement": "I was at the security desk. Lasers were disarmed from director panel.",
+        "known_facts": [
+          "security_guard_at_main_desk"
+        ],
+        "contradictions": [],
+        "avatar_type": "butler",
+        "is_guilty": false
+      },
+      {
+        "id": "SUS-604",
+        "name": "Baroness von Hayes",
+        "occupation": "Foreign Diplomat",
+        "relationship": "Museum Patron",
+        "motive": "Diplomatic claim on the jewel.",
+        "alibi": "Attending embassy reception with full diplomatic staff.",
+        "statement": "I was surrounded by foreign dignitaries all evening.",
+        "known_facts": [
+          "diplomat_at_embassy"
+        ],
+        "contradictions": [],
+        "avatar_type": "doctor",
+        "is_guilty": false
+      }
+    ],
+    "evidence": [
+      {
+        "id": "EVD-601",
+        "name": "Glass Replica Diamond",
+        "description": "High-index cubic zirconia crystal left in place of genuine diamond.",
+        "category": "Direct",
+        "reliability": 1.0,
+        "relevance": 1.0,
+        "collected": false,
+        "scene_pos": [
+          450,
+          350,
+          90,
+          80
+        ],
+        "icon_type": "knife",
+        "facts_unlocked": [
+          "diamond_replaced_with_glass_replica"
+        ],
+        "details": "Hardness rating 8.0, confirming it is an artificial substitute."
+      },
+      {
+        "id": "EVD-602",
+        "name": "Biometric Vault Override Console",
+        "description": "Vault door security panel showing access authentication logs.",
+        "category": "Digital",
+        "reliability": 0.98,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          590,
+          430,
+          70,
+          60
+        ],
+        "icon_type": "folder",
+        "facts_unlocked": [
+          "suspect_biometric_override_used",
+          "suspect_entered_vault_at_midnight"
+        ],
+        "details": "Thumbprint #01 (Director Raymond Sterling) logged at 11:42 PM."
+      },
+      {
+        "id": "EVD-603",
+        "name": "Diamond Dust in Leather Briefcase",
+        "description": "Diamond facet dust found inside Raymond leather briefcase.",
+        "category": "Physical",
+        "reliability": 0.95,
+        "relevance": 0.95,
+        "collected": false,
+        "scene_pos": [
+          210,
+          310,
+          80,
+          60
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "sovereign_diamond_dust_in_briefcase"
+        ],
+        "details": "Refraction index matches Sovereign Diamond with zero doubt."
+      },
+      {
+        "id": "EVD-604",
+        "name": "Smuggling Bill of Lading",
+        "description": "Cargo manifest for steam cutter departing for Tangier at 2 AM.",
+        "category": "Circumstantial",
+        "reliability": 0.9,
+        "relevance": 0.85,
+        "collected": false,
+        "scene_pos": [
+          330,
+          440,
+          80,
+          50
+        ],
+        "icon_type": "document",
+        "facts_unlocked": [
+          "suspect_contracted_smuggling_vessel"
+        ],
+        "details": "Chartered in the name of Raymond Sterling."
+      },
+      {
+        "id": "EVD-605",
+        "name": "Laser Grid Override Tool",
+        "description": "Bypass keycard and device found in director office safe.",
+        "category": "Physical",
+        "reliability": 0.9,
+        "relevance": 0.8,
+        "collected": false,
+        "scene_pos": [
+          130,
+          430,
+          60,
+          50
+        ],
+        "icon_type": "phone",
+        "facts_unlocked": [
+          "laser_grid_bypassed_via_director_code"
+        ],
+        "details": "Configured specifically to bypass vault pressure sensors."
+      }
+    ],
+    "initial_facts": [
+      "diamond_replaced_with_glass_replica"
+    ],
+    "rules": [
+      {
+        "id": "RULE_601",
+        "name": "Vault Infiltration & Theft",
+        "antecedents": [
+          "diamond_replaced_with_glass_replica",
+          "suspect_biometric_override_used",
+          "suspect_entered_vault_at_midnight"
+        ],
+        "consequent": "suspect_stole_royal_diamond",
+        "description": "Disabling the vault with biometric credentials and swapping the gem proves theft."
+      },
+      {
+        "id": "RULE_602",
+        "name": "Grand Larceny Entailment",
+        "antecedents": [
+          "suspect_stole_royal_diamond",
+          "sovereign_diamond_dust_in_briefcase",
+          "suspect_contracted_smuggling_vessel"
+        ],
+        "consequent": "suspect_guilty_beyond_reasonable_doubt",
+        "description": "Theft established alongside physical diamond dust and smuggling arrangements confirms guilt beyond reasonable doubt."
+      }
+    ]
+  }
+]
